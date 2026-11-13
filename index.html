@@ -1,0 +1,694 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8ed">
+  <meta name="description" content="Welcome to MJ Bakery, Chennai. Explore our fresh buns, breads and delicious puffs. Order directly through WhatsApp.">
+  <title>MJ Bakery | Freshly Made, Simply Delicious</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#fff8ed',
+            dark: '#352319',
+            brown: '#70452f',
+            orange: '#c87936',
+            gold: '#e9b66b'
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            sans: ['DM Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fffaf2;
+      color: #352319;
+    }
+    .display { font-family: 'Playfair Display', serif; }
+    .hero-bg {
+      background:
+        radial-gradient(circle at 85% 20%, #f3dfc2 0, transparent 35%),
+        radial-gradient(circle at 10% 90%, #f7e5cc 0, transparent 35%),
+        #fff8ed;
+    }
+    .food-pattern {
+      background-image: radial-gradient(#c8793620 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .product-card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px #70452f12;
+    }
+    .btn-primary {
+      background: #70452f;
+      color: white;
+      transition: all .2s ease;
+    }
+    .btn-primary:hover {
+      background: #4d2e20;
+      transform: translateY(-2px);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cart-bounce { animation: bounce .3s ease; }
+    @keyframes bounce {
+      50% { transform: scale(1.2); }
+    }
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+    input, select {
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: #c87936 !important;
+      box-shadow: 0 0 0 3px #c8793620;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- CONFIGURATION -->
+<script>
+const CONFIG = {
+  bakeryName: "MJ Bakery",
+  phone: "919500104674",
+  owner: "Mohamed Jalal",
+  location: "Chennai",
+  currency: "₹",
+  products: [
+    { id: 1, name: "Plain Bread", price: 60, category: "Buns & Bread" },
+    { id: 2, name: "Butter Bun", price: 50, category: "Buns & Bread" },
+    { id: 3, name: "Sweet Mini Bun", price: 60, category: "Buns & Bread" },
+    { id: 4, name: "Cream Bun", price: 80, category: "Buns & Bread" },
+    { id: 5, name: "Veg Puff", price: 35, category: "Puff" },
+    { id: 6, name: "Full Egg Puff", price: 38, category: "Puff" },
+    { id: 7, name: "Chicken Puff", price: 40, category: "Puff" },
+    { id: 8, name: "Coconut Ball Puff", price: 35, category: "Puff" }
+  ]
+};
+</script>
+
+<!-- ANNOUNCEMENT -->
+<div class="bg-dark text-white text-center py-2 px-4 text-xs tracking-widest">
+  WELCOME TO MJ BAKERY · CHENNAI
+</div>
+
+<!-- NAVIGATION -->
+<header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-orange/10">
+  <nav class="max-w-7xl mx-auto px-5 md:px-8 h-20 flex items-center justify-between">
+
+    <a href="#" class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-full bg-dark text-gold flex items-center justify-center text-2xl display">M</div>
+      <div>
+        <div class="display text-2xl font-bold leading-none">MJ Bakery</div>
+        <div class="text-[9px] tracking-[3px] text-brown mt-1">FRESHNESS IN EVERY BITE</div>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+      <a href="#home" class="hover:text-orange">Home</a>
+      <a href="#menu" class="hover:text-orange">Our Menu</a>
+      <a href="#about" class="hover:text-orange">About</a>
+      <a href="#contact" class="hover:text-orange">Contact</a>
+    </div>
+
+    <a href="#menu" class="btn-primary rounded-full px-5 py-3 text-sm font-bold">
+      Order Now <span class="ml-1">→</span>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero-bg overflow-hidden">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-20 md:py-28 grid md:grid-cols-2 items-center gap-12">
+
+    <div class="reveal">
+      <div class="inline-flex items-center gap-2 bg-white border border-orange/20 rounded-full px-4 py-2 text-xs font-bold text-brown mb-7">
+        <span class="text-orange">✦</span>
+        YOUR LOCAL BAKERY IN CHENNAI
+      </div>
+
+      <h1 class="display text-5xl md:text-7xl leading-[1.12] font-bold mb-7">
+        A Little
+        <span class="text-orange italic">Happiness</span>
+        In Every Bite.
+      </h1>
+
+      <p class="text-brown text-base md:text-lg leading-8 max-w-lg mb-9">
+        From delicious buns and soft breads to crispy, flavourful puffs, discover something special at MJ Bakery.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <a href="#menu" class="btn-primary rounded-full px-8 py-4 font-bold text-sm shadow-lg">
+          Explore Our Menu →
+        </a>
+        <a href="#contact" class="border border-brown/30 rounded-full px-8 py-4 font-bold text-sm hover:bg-white transition">
+          Contact Us
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 mt-10 text-sm text-brown">
+        <span class="text-orange text-xl">✦</span>
+        <span>Good food. Simple choices. Easy ordering.</span>
+      </div>
+    </div>
+
+    <div class="reveal relative">
+      <div class="absolute inset-4 bg-gold/30 rounded-[3rem] rotate-6"></div>
+      <div class="relative bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-orange/10 food-pattern">
+        <div class="text-center py-8">
+          <div class="text-7xl md:text-8xl mb-6">🥐</div>
+          <div class="display text-4xl md:text-5xl font-bold text-dark mb-4">
+            Baked With
+            <span class="text-orange italic">Love.</span>
+          </div>
+          <p class="text-brown text-sm tracking-widest uppercase">
+            Buns · Bread · Puffs
+          </p>
+          <div class="w-16 h-1 bg-gold mx-auto mt-7 rounded-full"></div>
+        </div>
+        <div class="absolute -bottom-5 -left-3 bg-dark text-white rounded-2xl px-6 py-4 shadow-xl">
+          <p class="text-gold text-xs tracking-widest">DISCOVER</p>
+          <p class="font-bold">MJ Bakery</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section class="bg-dark text-white py-12">
+  <div class="max-w-7xl mx-auto px-5 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+    <div>
+      <div class="text-3xl mb-3">🍞</div>
+      <h3 class="font-bold">Buns & Bread</h3>
+      <p class="text-white/60 text-sm mt-2">Explore our bread and bun selection.</p>
+    </div>
+    <div>
+      <div class="text-3xl mb-3">🥐</div>
+      <h3 class="font-bold">Delicious Puffs</h3>
+      <p class="text-white/60 text-sm mt-2">Choose from our puff varieties.</p>
+    </div>
+    <div>
+      <div class="text-3xl mb-3">💬</div>
+      <h3 class="font-bold">Easy WhatsApp Orders</h3>
+      <p class="text-white/60 text-sm mt-2">Send your order directly to us.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-24 px-5 md:px-8">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+      <p class="text-orange text-xs font-bold tracking-[4px] mb-4">OUR MENU</p>
+      <h2 class="display text-4xl md:text-5xl font-bold mb-5">
+        Something For Every Craving.
+      </h2>
+      <p class="text-brown leading-7">
+        Browse our selection, add your favourites to the cart, and place your order through WhatsApp.
+      </p>
+    </div>
+
+    <!-- BREAD -->
+    <div class="mb-16 reveal">
+      <div class="flex items-center justify-between mb-7 border-b border-orange/20 pb-4">
+        <div>
+          <p class="text-orange text-xs font-bold tracking-widest">CATEGORY 01</p>
+          <h3 class="display text-3xl font-bold mt-1">Buns & Bread</h3>
+        </div>
+        <span class="text-3xl">🍞</span>
+      </div>
+      <div id="breadProducts" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+
+    <!-- PUFF -->
+    <div class="reveal">
+      <div class="flex items-center justify-between mb-7 border-b border-orange/20 pb-4">
+        <div>
+          <p class="text-orange text-xs font-bold tracking-widest">CATEGORY 02</p>
+          <h3 class="display text-3xl font-bold mt-1">Puffs</h3>
+        </div>
+        <span class="text-3xl">🥐</span>
+      </div>
+      <div id="puffProducts" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="bg-[#f4e8d8] py-24 px-5 md:px-8">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+
+    <div class="reveal">
+      <div class="bg-cream rounded-[2rem] p-10 md:p-14 text-center shadow-sm">
+        <div class="text-7xl mb-7">🧁</div>
+        <h3 class="display text-4xl font-bold">MJ Bakery</h3>
+        <p class="text-orange text-xs tracking-[4px] mt-4">A TASTE TO REMEMBER</p>
+        <div class="w-16 h-1 bg-gold rounded-full mx-auto mt-7"></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="text-orange text-xs font-bold tracking-[4px] mb-4">ABOUT US</p>
+      <h2 class="display text-4xl md:text-5xl font-bold leading-tight mb-6">
+        Your Bakery, Your Everyday Favourite.
+      </h2>
+      <p class="text-brown leading-8 mb-5">
+        Welcome to MJ Bakery. We bring together a selection of buns, breads and puffs in one convenient place.
+      </p>
+      <p class="text-brown leading-8 mb-8">
+        Whether you're looking for a simple bread or a tasty puff, explore our menu and connect with us to order.
+      </p>
+      <a href="#menu" class="btn-primary inline-block rounded-full px-8 py-4 font-bold text-sm">
+        Explore The Menu →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section class="py-24 px-5 md:px-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="text-orange text-xs font-bold tracking-[4px] mb-4">SIMPLE & EASY</p>
+      <h2 class="display text-4xl md:text-5xl font-bold">How To Order</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="reveal bg-white p-8 rounded-3xl border border-orange/10 text-center">
+        <div class="w-14 h-14 rounded-full bg-cream text-2xl flex items-center justify-center mx-auto mb-5">01</div>
+        <h3 class="font-bold text-lg mb-3">Choose Your Favourites</h3>
+        <p class="text-sm text-brown leading-7">Browse our menu and add your favourite products to your cart.</p>
+      </div>
+      <div class="reveal bg-white p-8 rounded-3xl border border-orange/10 text-center">
+        <div class="w-14 h-14 rounded-full bg-cream text-2xl flex items-center justify-center mx-auto mb-5">02</div>
+        <h3 class="font-bold text-lg mb-3">Review Your Order</h3>
+        <p class="text-sm text-brown leading-7">Check your selected items, quantities and order total.</p>
+      </div>
+      <div class="reveal bg-white p-8 rounded-3xl border border-orange/10 text-center">
+        <div class="w-14 h-14 rounded-full bg-cream text-2xl flex items-center justify-center mx-auto mb-5">03</div>
+        <h3 class="font-bold text-lg mb-3">Send Via WhatsApp</h3>
+        <p class="text-sm text-brown leading-7">Send your order details directly to MJ Bakery through WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER CART -->
+<section id="order" class="bg-cream py-24 px-5 md:px-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <p class="text-orange text-xs font-bold tracking-[4px] mb-4">YOUR SELECTION</p>
+      <h2 class="display text-4xl md:text-5xl font-bold">Your Order Basket</h2>
+      <p class="text-brown mt-4 text-sm">Review your items before sending your order.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-orange/10 reveal">
+      <div id="cartItems">
+        <div class="text-center py-8 text-brown">
+          <div class="text-4xl mb-3">🛒</div>
+          Your basket is empty. Explore our menu to get started.
+        </div>
+      </div>
+
+      <div class="border-t border-orange/20 mt-6 pt-6">
+        <div class="flex justify-between text-xl font-bold">
+          <span>Total Amount</span>
+          <span id="cartTotal" class="text-orange">₹0</span>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mt-8">
+        <div>
+          <label class="block text-sm font-bold mb-2" for="customerName">Your Name *</label>
+          <input id="customerName" type="text" placeholder="Enter your name" class="w-full border border-orange/20 rounded-xl px-4 py-3 bg-cream/50">
+        </div>
+        <div>
+          <label class="block text-sm font-bold mb-2" for="orderType">Order Preference *</label>
+          <select id="orderType" class="w-full border border-orange/20 rounded-xl px-4 py-3 bg-cream/50">
+            <option value="Pickup">Pickup</option>
+            <option value="Delivery">Delivery (confirm availability on WhatsApp)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <label class="block text-sm font-bold mb-2" for="notes">Additional Instructions (Optional)</label>
+        <textarea id="notes" rows="3" placeholder="Any special instructions?" class="w-full border border-orange/20 rounded-xl px-4 py-3 bg-cream/50 resize-none"></textarea>
+      </div>
+
+      <button onclick="sendOrder()" class="whatsapp w-full rounded-xl py-4 mt-7 font-bold flex items-center justify-center gap-3 hover:brightness-95 transition">
+        <span class="text-xl">☏</span>
+        Send Order Through WhatsApp
+        <span>→</span>
+      </button>
+
+      <p class="text-center text-xs text-brown/70 mt-4">
+        Your order will be sent to MJ Bakery for confirmation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ / TRUST -->
+<section class="py-24 px-5 md:px-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="text-orange text-xs font-bold tracking-[4px] mb-4">NEED TO KNOW?</p>
+      <h2 class="display text-4xl font-bold">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="space-y-4 reveal">
+      <details class="bg-white border border-orange/10 rounded-2xl p-6 group">
+        <summary class="font-bold cursor-pointer flex justify-between gap-4">
+          How can I place an order?
+          <span class="text-orange">+</span>
+        </summary>
+        <p class="text-sm text-brown leading-7 mt-4">Choose your products, add them to your basket, and send your order through WhatsApp.</p>
+      </details>
+
+      <details class="bg-white border border-orange/10 rounded-2xl p-6 group">
+        <summary class="font-bold cursor-pointer flex justify-between gap-4">
+          Can I order multiple products?
+          <span class="text-orange">+</span>
+        </summary>
+        <p class="text-sm text-brown leading-7 mt-4">Yes. Add multiple products and adjust their quantities before placing your order.</p>
+      </details>
+
+      <details class="bg-white border border-orange/10 rounded-2xl p-6 group">
+        <summary class="font-bold cursor-pointer flex justify-between gap-4">
+          Is home delivery available?
+          <span class="text-orange">+</span>
+        </summary>
+        <p class="text-sm text-brown leading-7 mt-4">Select delivery in the order form and contact us on WhatsApp to confirm availability.</p>
+      </details>
+
+      <details class="bg-white border border-orange/10 rounded-2xl p-6 group">
+        <summary class="font-bold cursor-pointer flex justify-between gap-4">
+          How can I confirm product availability?
+          <span class="text-orange">+</span>
+        </summary>
+        <p class="text-sm text-brown leading-7 mt-4">Contact MJ Bakery directly through WhatsApp before finalising your order.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact" class="bg-dark text-white py-24 px-5 md:px-8">
+  <div class="max-w-4xl mx-auto text-center reveal">
+    <p class="text-gold text-xs font-bold tracking-[4px] mb-5">LET'S CONNECT</p>
+    <h2 class="display text-4xl md:text-6xl font-bold leading-tight mb-6">
+      Your Next Favourite Bite Is Just A Message Away.
+    </h2>
+    <p class="text-white/65 leading-7 mb-9 max-w-xl mx-auto">
+      Have a question about our menu or want to place an order? Get in touch with MJ Bakery.
+    </p>
+
+    <a id="contactWhatsApp" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 whatsapp rounded-full px-9 py-4 font-bold hover:scale-105 transition">
+      <span class="text-xl">☏</span>
+      Chat With Us On WhatsApp
+    </a>
+
+    <div class="mt-10 text-white/60 text-sm space-y-2">
+      <p>📍 Chennai</p>
+      <p>📞 +91 95001 04674</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#25170f] text-white/70 px-5 pt-14 pb-8">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="grid md:grid-cols-3 gap-10 pb-12">
+      <div>
+        <h3 class="display text-3xl text-white font-bold">MJ Bakery</h3>
+        <p class="text-xs tracking-widest text-gold mt-2">FRESHNESS IN EVERY BITE</p>
+        <p class="text-sm leading-7 mt-5 max-w-xs">
+          Explore our selection of buns, breads and puffs. We're happy to hear from you.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-5">Quick Links</h4>
+        <div class="space-y-3 text-sm flex flex-col">
+          <a href="#home" class="hover:text-gold">Home</a>
+          <a href="#menu" class="hover:text-gold">Our Menu</a>
+          <a href="#about" class="hover:text-gold">About Us</a>
+          <a href="#order" class="hover:text-gold">Order Now</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-5">Contact</h4>
+        <p class="text-sm mb-3">📍 Chennai</p>
+        <p class="text-sm mb-5">📞 +91 95001 04674</p>
+        <a id="footerWhatsApp" href="#" target="_blank" rel="noopener" class="text-gold font-bold text-sm hover:text-white">
+          Message Us →
+        </a>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-7 text-center">
+      <p class="text-xs">© <span id="year"></span> MJ Bakery. All Rights Reserved.</p>
+      <p class="text-xs mt-3">
+        Owned by <span class="text-white font-semibold">Mohamed Jalal</span>
+      </p>
+      <p class="text-xs mt-2">
+        Website crafted with care by
+        <a href="https://github.com/" target="_blank" rel="noopener" class="text-gold font-bold">MJ Web Solutions</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a id="floatingWhatsApp" href="#" target="_blank" rel="noopener" aria-label="Chat with MJ Bakery on WhatsApp"
+   class="fixed bottom-6 right-5 z-50 whatsapp w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl hover:scale-110 transition">
+  ☏
+</a>
+
+<!-- MOBILE CART BAR -->
+<div id="mobileCartBar" class="hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-orange/20 p-4 shadow-2xl">
+  <div class="max-w-7xl mx-auto flex justify-between items-center gap-3">
+    <div>
+      <p class="text-xs text-brown" id="mobileCartCount">0 items</p>
+      <p class="font-bold text-lg" id="mobileCartTotal">₹0</p>
+    </div>
+    <a href="#order" class="btn-primary rounded-full px-7 py-3 text-sm font-bold">
+      View Basket →
+    </a>
+  </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+let cart = {};
+
+const money = amount => CONFIG.currency + amount;
+
+function renderProducts() {
+  const bread = CONFIG.products.filter(p => p.category === "Buns & Bread");
+  const puffs = CONFIG.products.filter(p => p.category === "Puff");
+
+  function card(product) {
+    const quantity = cart[product.id] || 0;
+
+    return `
+      <article class="product-card bg-white border border-orange/10 rounded-2xl p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start">
+            <span class="text-[10px] tracking-widest text-orange font-bold uppercase">${product.category}</span>
+            <span class="text-xs text-brown/50">#${String(product.id).padStart(2,'0')}</span>
+          </div>
+          <h4 class="display text-xl font-bold mt-5">${product.name}</h4>
+          <p class="text-orange text-xl font-bold mt-3">${money(product.price)}</p>
+        </div>
+
+        <div class="mt-7">
+          ${quantity === 0 ? `
+            <button onclick="changeQty(${product.id}, 1)"
+              class="btn-primary w-full py-3 rounded-xl text-sm font-bold">
+              + Add To Basket
+            </button>
+          ` : `
+            <div class="flex items-center justify-between bg-cream rounded-xl p-2">
+              <button onclick="changeQty(${product.id}, -1)" class="w-10 h-9 rounded-lg bg-white font-bold text-lg">−</button>
+              <span class="font-bold">${quantity}</span>
+              <button onclick="changeQty(${product.id}, 1)" class="w-10 h-9 rounded-lg bg-white font-bold text-lg">+</button>
+            </div>
+          `}
+        </div>
+      </article>
+    `;
+  }
+
+  document.getElementById("breadProducts").innerHTML = bread.map(card).join("");
+  document.getElementById("puffProducts").innerHTML = puffs.map(card).join("");
+}
+
+function changeQty(id, amount) {
+  cart[id] = Math.max(0, (cart[id] || 0) + amount);
+
+  if (cart[id] === 0) delete cart[id];
+
+  renderProducts();
+  renderCart();
+}
+
+function renderCart() {
+  const selected = CONFIG.products.filter(p => cart[p.id] > 0);
+  const totalItems = selected.reduce((sum, p) => sum + cart[p.id], 0);
+  const total = selected.reduce((sum, p) => sum + p.price * cart[p.id], 0);
+
+  const container = document.getElementById("cartItems");
+
+  if (!selected.length) {
+    container.innerHTML = `
+      <div class="text-center py-8 text-brown">
+        <div class="text-4xl mb-3">🛒</div>
+        Your basket is empty. Explore our menu to get started.
+      </div>`;
+  } else {
+    container.innerHTML = selected.map(p => `
+      <div class="flex items-center justify-between gap-3 py-4 border-b border-orange/10">
+        <div class="min-w-0">
+          <h4 class="font-bold">${p.name}</h4>
+          <p class="text-sm text-brown">${money(p.price)} × ${cart[p.id]}</p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="changeQty(${p.id}, -1)" class="w-8 h-8 rounded-lg bg-cream font-bold">−</button>
+          <span class="font-bold">${cart[p.id]}</span>
+          <button onclick="changeQty(${p.id}, 1)" class="w-8 h-8 rounded-lg bg-cream font-bold">+</button>
+        </div>
+
+        <span class="font-bold text-orange">${money(p.price * cart[p.id])}</span>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("cartTotal").textContent = money(total);
+  document.getElementById("mobileCartTotal").textContent = money(total);
+  document.getElementById("mobileCartCount").textContent = totalItems + (totalItems === 1 ? " item" : " items");
+
+  const bar = document.getElementById("mobileCartBar");
+  bar.classList.toggle("hidden", totalItems === 0);
+
+  document.getElementById("floatingWhatsApp").style.bottom =
+    totalItems > 0 && window.innerWidth < 768 ? "90px" : "24px";
+}
+
+function sendOrder() {
+  const selected = CONFIG.products.filter(p => cart[p.id] > 0);
+
+  if (!selected.length) {
+    alert("Please add at least one product to your basket.");
+    return;
+  }
+
+  const name = document.getElementById("customerName").value.trim();
+  const type = document.getElementById("orderType").value;
+  const notes = document.getElementById("notes").value.trim();
+
+  if (!name) {
+    alert("Please enter your name before placing your order.");
+    document.getElementById("customerName").focus();
+    return;
+  }
+
+  const total = selected.reduce((sum, p) => sum + p.price * cart[p.id], 0);
+
+  let message = `Hello ${CONFIG.bakeryName}!\n\n`;
+  message += `I would like to place an order.\n\n`;
+  message += `👤 Customer: ${name}\n`;
+  message += `📍 Location: ${CONFIG.location}\n`;
+  message += `📦 Preference: ${type}\n\n`;
+  message += `🛒 *ORDER DETAILS*\n`;
+
+  selected.forEach(p => {
+    message += `• ${p.name} × ${cart[p.id]} = ${money(p.price * cart[p.id])}\n`;
+  });
+
+  message += `\n💰 *TOTAL: ${money(total)}*\n`;
+
+  if (notes) {
+    message += `\n📝 Instructions: ${notes}\n`;
+  }
+
+  message += `\nPlease confirm availability and my order. Thank you!`;
+
+  const url = `https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+function setupWhatsApp() {
+  const message = encodeURIComponent("Hello MJ Bakery! I would like to know more about your menu.");
+  const url = `https://wa.me/${CONFIG.phone}?text=${message}`;
+
+  ["contactWhatsApp", "footerWhatsApp", "floatingWhatsApp"].forEach(id => {
+    document.getElementById(id).href = url;
+  });
+}
+
+// Scroll reveal animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// Initialise
+document.getElementById("year").textContent = new Date().getFullYear();
+
+setupWhatsApp();
+renderProducts();
+renderCart();
+</script>
+
+</body>
+</html>
